@@ -1,3 +1,3 @@
-# Lambda-cli
+# LambdaCalc
 
-lambda-cli is a comandline iterface for transforming normal mathimatical terms into a lambda calculus and then solving them
+lambdaCalc is a cli-calculator for transforming normal mathimatical terms into a lambda calculus and then solving them
