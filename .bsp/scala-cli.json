@@ -1,15 +1,15 @@
 {
   "name": "scala-cli",
   "argv": [
-    "/bin/scala-cli",
+    "/usr/sbin/scala-cli",
     "bsp",
     "--json-options",
-    "/home/jgh/Documents/BFO/Inf/Mod.323 Functional Programming/lambda-cli/.scala-build/ide-options-v2.json",
+    "/home/jgh/LambdaCalc/.scala-build/ide-options-v2.json",
     "--json-launcher-options",
-    "/home/jgh/Documents/BFO/Inf/Mod.323 Functional Programming/lambda-cli/.scala-build/ide-launcher-options.json",
+    "/home/jgh/LambdaCalc/.scala-build/ide-launcher-options.json",
     "--envs-file",
-    "/home/jgh/Documents/BFO/Inf/Mod.323 Functional Programming/lambda-cli/.scala-build/ide-envs.json",
-    "/home/jgh/Documents/BFO/Inf/Mod.323 Functional Programming/lambda-cli"
+    "/home/jgh/LambdaCalc/.scala-build/ide-envs.json",
+    "/home/jgh/LambdaCalc"
   ],
   "version": "1.13.0",
   "bspVersion": "2.1.1",

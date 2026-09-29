@@ -38,17 +38,4 @@ object lambda {
 	def powerToLambda(x: String, y: String): String = {
 		return "(λm.λn. n m)(" + x + ")(" + y + ")"
 	}
-
-	// Converts a conventional equation to lambda-calculus term
-	// TODO
-	def lambdaConverter(term: String): String = {
-		//naturalNumberToLambda(term.trim.toInt)
-		return powerToLambda(naturalNumberToLambda(2),naturalNumberToLambda(3))
-	}
-
-	// Solves one step of lambda-calculus term given as a string.
-	// TODO
-	def lambdaSolver(term: String): String = {
-		return term
-	}
 }
