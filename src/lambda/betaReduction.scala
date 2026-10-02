@@ -33,6 +33,9 @@ object betaReduction {
 
 	// ---------- Parsing ----------
 
+	/** Parse a term string (used by the visualiser). */
+	def parseTerm(term: String): Term = parse(term)
+
 	private def parse(s: String): Term = {
 		val (t, rest) = parseExpr(tokenize(s))
 		if (rest.nonEmpty)
