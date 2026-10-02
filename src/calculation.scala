@@ -116,13 +116,66 @@ object calculation {
 
 	// ---------- Encoder ----------
 	private def toLambda(e: Expr): String = e match {
-		case Num(n)		   => lambda.naturalNumberToLambda(n)
-		case Atom("true")	 => lambda.boolToLambda(true)
-		case Atom("false")	=> lambda.boolToLambda(false)
-		case Atom(sym)		=> sym
+		case Num(n)           => lambda.naturalNumberToLambda(n)
+		case Atom("true")     => lambda.boolToLambda(true)
+		case Atom("false")    => lambda.boolToLambda(false)
+		case Atom(sym)        => sym
 		case BinOp('+', l, r) => lambda.additionToLambda(toLambda(l), toLambda(r))
 		case BinOp('*', l, r) => lambda.multiplicationToLambda(toLambda(l), toLambda(r))
 		case BinOp('^', l, r) => lambda.powerToLambda(toLambda(l), toLambda(r))
 		case BinOp(op, _, _)  => throw new UnsupportedOperationException(s"Unsupported op: $op")
+	}
+
+	//tries to decode chuch nubers to decimal numbers
+	def lambdaToNaturalNumber(lambdaTerm: String): String = {
+		val prefix = "λf.λx."
+
+		// skip Whitespace that the endoder doesn't need
+		def skipWs(s: String, i: Int): Int =
+			if (i < s.length && s.charAt(i).isWhitespace) {
+				return skipWs(s, i + 1)
+			} else {
+				return i
+			}
+
+		def decodeBody(s: String, start: Int): Option[(Int, Int)] = {
+			val i = skipWs(s, start)
+			if (i >= s.length) {
+				return None
+			}
+			else s.charAt(i) match {
+				case 'x' => Some((0, i + 1))
+				case 'f' =>
+					val j = skipWs(s, i + 1)
+					if (j < s.length && s.charAt(j) == '('){
+						decodeBody(s, j + 1).flatMap { case (n, end) =>
+							val k = skipWs(s, end)
+							if (k < s.length && s.charAt(k) == ')'){
+								Some((n + 1, k + 1))
+							} else {
+								None
+							}
+						}
+					} else if (j < s.length && s.charAt(j) == 'x') {
+						Some((1, j + 1))
+					} else {
+						return None
+					}
+				case _ => return None
+			}
+		}
+
+		def loop(i: Int, acc: List[String]): String =
+			if (i >= lambdaTerm.length) {
+				acc.reverse.mkString
+			} else if (lambdaTerm.startsWith(prefix, i)) {
+				decodeBody(lambdaTerm, i + prefix.length) match {
+					case Some((n, end)) => loop(end, n.toString :: acc)
+					case None           => loop(i + 1, lambdaTerm.charAt(i).toString :: acc)
+				}
+			} else {
+				loop(i + 1, lambdaTerm.charAt(i).toString :: acc)
+			}
+		loop(0, Nil)
 	}
 }

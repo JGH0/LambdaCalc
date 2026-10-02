@@ -38,4 +38,9 @@ object lambda {
 	def powerToLambda(x: String, y: String): String = {
 		return "(λm.λn. n m)(" + x + ")(" + y + ")"
 	}
+
+	// tries to decode a churc encoding to a number
+	def lambdaToNaturalNumber(lambdaTerm: String): String = {
+		return ""
+	}
 }
