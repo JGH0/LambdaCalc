@@ -17,6 +17,10 @@ object main {
 					case _: UnsupportedOperationException => "invalid equation"
 				}
 			println("= " + result)
+			val betaNormal = betaReduction.betaReductionSolve(result)
+			println("= " + betaNormal)
+			println("= " + calculation.lambdaToNaturalNumber(betaNormal))
+
 		}
 	}
 
