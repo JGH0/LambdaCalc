@@ -16,3 +16,5 @@ the bars between them are applications
 
 with :steps all the beta reduction steps are shown one by one, :auto decides if it waits
 :delay <ms> between them or waits for you to press enter, and :settings prints the current config
+
+in a real terminal the arrow up/down keys work like in a shell, the history is kept in ~/.lambdaCalc_history

@@ -1,13 +1,14 @@
-import scala.io.StdIn
+//> using dep "org.jline:jline:4.4.6"
 
 object main {
 
 	def main(args: Array[String]): Unit = {
 		val startSettings = parseArgs(args.toList, settings.default)
+		val handle        = console.init()
 
 		println("Calculator started, enter an equation to solve (empty line to quit):")
 		println("type :settings for the settings, :visu to toggle the lambda diagrams")
-		loop(-1, startSettings)
+		loop(-1, startSettings, handle)
 	}
 
 	// pass settings on the command line, e.g. --visu --steps --manual --delay 300
@@ -78,7 +79,7 @@ object main {
 		}
 	}
 
-	def solve(input: String, s: Settings): Unit = {
+	def solve(input: String, s: Settings, h: console.Handle): Unit = {
 		val result =
 			try calculation.lambdaConverter(input)
 			catch {
@@ -90,7 +91,7 @@ object main {
 			val steps =
 				try betaReduction.betaReductionSteps(result)
 				catch { case _: Throwable => List(result) }
-			showSteps(steps, s)
+			showSteps(steps, s, h)
 		} else if (s.visuMode) {
 			println("lambda term")
 			println(johnTrompVisu.visualize(result))
@@ -105,7 +106,7 @@ object main {
 	}
 
 	// walks the term through its beta reductions
-	def showSteps(steps: List[String], s: Settings): Unit = {
+	def showSteps(steps: List[String], s: Settings, h: console.Handle): Unit = {
 		val last = steps.size - 1
 
 		def go(rest: List[String], i: Int): Unit = rest match {
@@ -115,33 +116,30 @@ object main {
 				println(name + " / " + last)
 				if (s.visuMode) println(johnTrompVisu.visualize(term))
 				else println("  " + term)
-				if (i < last) advance(s)
+				if (i < last) advance(s, h)
 				go(tl, i + 1)
 		}
 		go(steps, 0)
 	}
 
 	// wait a bit in auto mode, otherwise wait for the user to press enter
-	def advance(s: Settings): Unit =
+	def advance(s: Settings, h: console.Handle): Unit =
 		if (s.autoSteps) Thread.sleep(s.stepDelay.toLong)
-		else {
-			print("(enter to continue) ")
-			StdIn.readLine()
-		}
+		else console.readLine(h, "(enter to continue) ")
 
 	// runs code for a given amount of runs
 	// if n < 0 it will loop indefinitely
-	def loop(n: Int, s: Settings): Unit =
+	def loop(n: Int, s: Settings, h: console.Handle): Unit =
 		if (n != 0) {
-			val input = StdIn.readLine("> ")
+			val input = console.readLine(h, "> ")
 			if (input == null || input.trim.isEmpty) {
 				println("bye")
 				sys.exit(0)
 			} else if (input.trim.startsWith(":")) {
-				loop(n - 1, command(input.trim, s))
+				loop(n - 1, command(input.trim, s), h)
 			} else {
-				solve(input, s)
-				loop(n - 1, s)
+				solve(input, s, h)
+				loop(n - 1, s, h)
 			}
 		}
 }
