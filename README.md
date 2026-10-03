@@ -8,3 +8,8 @@ use $ to indicate that the folowing term should be interperted as a number: (thi
 	$false^$true, false will be true times multipicated or
 	$++$+, then plus will be added to plus
 	$*+$false, then mulitplication will be sumed with false
+
+# Lambda diagrams
+start with --visu (or type :visu while running) to draw the terms as john Tromp lambda diagrams
+instead of solving them, horizontal lines are the abstractions, vertical lines the variables and
+the bars between them are applications
