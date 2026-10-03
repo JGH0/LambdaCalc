@@ -31,6 +31,22 @@ object betaReduction {
 		render(loop(parse(term), maxSteps))
 	}
 
+	/** Every term from the input down to its β-normal form, both included. */
+	def betaReductionSteps(term: String): List[String] = {
+		val maxSteps = 10000
+		val start    = parse(term)
+
+		@scala.annotation.tailrec
+		def loop(t: Term, steps: Int, acc: List[Term]): List[Term] =
+			if (steps <= 0) acc.reverse
+			else reduceOnce(t) match {
+				case Some(t2) => loop(t2, steps - 1, t2 :: acc)
+				case None     => acc.reverse
+			}
+
+		(start :: loop(start, maxSteps, Nil)).map(render)
+	}
+
 	// ---------- Parsing ----------
 
 	/** Parse a term string (used by the visualiser). */

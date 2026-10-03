@@ -13,3 +13,6 @@ use $ to indicate that the folowing term should be interperted as a number: (thi
 start with --visu (or type :visu while running) to draw the terms as john Tromp lambda diagrams
 instead of solving them, horizontal lines are the abstractions, vertical lines the variables and
 the bars between them are applications
+
+with :steps all the beta reduction steps are shown one by one, :auto decides if it waits
+:delay <ms> between them or waits for you to press enter, and :settings prints the current config
