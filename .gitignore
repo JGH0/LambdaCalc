@@ -1,2 +1,4 @@
 .metals
 .scala-build
+site/
+node_modules/

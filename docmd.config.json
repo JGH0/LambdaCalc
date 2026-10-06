@@ -1,0 +1,72 @@
+{
+	"title": "LambdaCalc",
+	"url": "https://jgh0.github.io/LambdaCalc",
+	"src": "docs",
+	"out": "site",
+	"base": "/LambdaCalc/",
+	"autoTitleFromH1": true,
+	"copyCode": true,
+	"pageNavigation": true,
+	"navigation": [
+		{ "title": "Introduction", "path": "/", "icon": "home" },
+		{ "title": "Getting Started", "path": "/getting-started", "icon": "rocket" },
+		{
+			"title": "Concepts",
+			"icon": "book-open",
+			"children": [
+				{ "title": "Lambda Calculus Basics", "path": "/concepts/lambda-calculus" },
+				{ "title": "Beta Reduction", "path": "/concepts/beta-reduction" },
+				{ "title": "Church Encoding", "path": "/concepts/church-encoding" },
+				{ "title": "Lambda Diagrams", "path": "/concepts/lambda-diagrams" }
+			]
+		},
+		{
+			"title": "Guides",
+			"icon": "wrench",
+			"children": [
+				{ "title": "Command Line & Commands", "path": "/guides/commands" },
+				{ "title": "Visualisation & Reduction Steps", "path": "/guides/visualisation" },
+				{ "title": "The $ Escape Syntax", "path": "/guides/dollar-syntax" }
+			]
+		},
+		{
+			"title": "Architecture",
+			"icon": "layers",
+			"children": [
+				{ "title": "Overview", "path": "/architecture/overview" },
+				{ "title": "Calculation & Parsing", "path": "/architecture/calculation" },
+				{ "title": "Lambda Encoding", "path": "/architecture/lambda-encoding" },
+				{ "title": "Beta Reduction Engine", "path": "/architecture/beta-reduction" },
+				{ "title": "John Tromp Visualiser", "path": "/architecture/visualiser" },
+				{ "title": "Console & Settings", "path": "/architecture/console-settings" }
+			]
+		},
+		{ "title": "Sources", "path": "/sources", "icon": "link" }
+	],
+	"layout": {
+		"spa": true,
+		"breadcrumbs": true,
+		"sidebar": {
+			"collapsible": true,
+			"defaultCollapsed": false
+		},
+		"optionsMenu": {
+			"position": "header",
+			"components": {
+				"search": true,
+				"themeSwitch": true
+			}
+		}
+	},
+	"plugins": {
+		"search": {},
+		"seo": {},
+		"sitemap": {},
+		"llms": {},
+		"mermaid": {},
+		"math": {},
+		"ai": {
+			"assistant": false
+		}
+	}
+}

@@ -159,7 +159,7 @@ object betaReduction {
 		case Var(y)	=> if (y == x) s else Var(y)
 		case App(f, a) => App(substitute(f, x, s), substitute(a, x, s))
 		case Lam(y, b) =>
-			if (y == x) Lam(y, b) // shadowed — stop
+			if (y == x) Lam(y, b) // shadowed - stop
 			else if (freeVars(s).contains(y)) { // would capture -> rename
 				val z = fresh(y, freeVars(b) ++ freeVars(s) + x)
 				Lam(z, substitute(substitute(b, y, Var(z)), x, s))
